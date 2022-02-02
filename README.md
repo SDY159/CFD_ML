@@ -16,8 +16,7 @@ Total 3,125 datasets
 This project is divided into 8 levels, according with the name of directories.
 level_1/ : Ansys Fluent CFD data processing codes and journal files
 level_2/ : LSTM for particle trajectory prediction
-level_3/ : CNN for Erosion rate prediction based on the CFD data
-level_4/ : LSTM + CNN for Erosion rate prediction based on the output of LSTM
-level_5/ : Codes for feature importance analyses
-level_6/ : Hyperparameter optimization for CNN
-level_7/ : Data visualization processing
+level_3/ : LSTM + CNN for Erosion rate prediction based on the output of LSTM
+level_4/ : Codes for feature importance analyses
+level_5/ : Hyperparameter optimization for CNN
+level_6/ : Data visualization processing
