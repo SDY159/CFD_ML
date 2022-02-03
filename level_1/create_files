@@ -1,0 +1,26 @@
+#!/bin/bash
+for VALUE1 in $(seq 0.00004 0.000004 0.000059)
+do
+    for VALUE2 in $(seq 8.45 1.6 16.44)
+    do
+        for VALUE3 in $(seq 25 8 64)
+        do
+            for VALUE4 in $(seq 12000000 960000 16700000)
+            do
+                for VALUE5 in $(seq 1000000 400000 2900000)
+                do
+
+
+                 echo $VALUE1 $VALUE2 $VALUE3 $VALUE4 $VALUE5
+                 cp -rf ,templates cell_$VALUE1-$VALUE2-$VALUE3-$VALUE4-$VALUE5
+                 sed -i "s/EEEEE/$VALUE1/g" cell_$VALUE1-$VALUE2-$VALUE3-$VALUE4-$VALUE5/FFF.jou
+                 sed -i "s/FFFFF/$VALUE2/g" cell_$VALUE1-$VALUE2-$VALUE3-$VALUE4-$VALUE5/FFF.jou
+                 sed -i "s/GGGGG/$VALUE3/g" cell_$VALUE1-$VALUE2-$VALUE3-$VALUE4-$VALUE5/FFF.jou
+                 sed -i "s/HHHHH/$VALUE4/g" cell_$VALUE1-$VALUE2-$VALUE3-$VALUE4-$VALUE5/FFF.jou
+                 sed -i "s/IIIII/$VALUE5/g" cell_$VALUE1-$VALUE2-$VALUE3-$VALUE4-$VALUE5/FFF.jou
+
+                 done
+             done
+        done
+    done
+done

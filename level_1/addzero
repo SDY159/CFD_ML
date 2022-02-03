@@ -1,0 +1,18 @@
+#!/bin/bash
+for VALUE1 in $(seq 0.00004 0.000004 0.000059)
+do
+    for VALUE2 in $(seq 8.45 1.6 10.04)
+    do
+        for VALUE3 in $(seq 25 8 64)
+        do
+            for VALUE4 in $(seq 12000000 960000 16700000)
+            do
+                for VALUE5 in $(seq 1000000 400000 2900000)
+                do
+                 echo $VALUE1 $VALUE2 $VALUE3 $VALUE4 $VALUE5
+                 mv cell_$VALUE1-$VALUE2-$VALUE3-$VALUE4-$VALUE5 cell_$VALUE1-0$VALUE2-$VALUE3-$VALUE4-$VALUE5
+                 done
+             done
+         done
+    done
+done
