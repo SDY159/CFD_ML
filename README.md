@@ -7,15 +7,15 @@ A simplified part of the steam distribution header in the OP-650, a boiler model
 
 Operating parameters
 
-Particle size: 40-56 micrometer
+Particle size: 40-60 micrometer
 
-Main-inlet speed: 8.45-14.85 m/s
+Main-inlet speed: 16.75-27.12 m/s
 
-Sub-inlet speed: 25-57 m/s
+Sub-inlet speed: 237.0-430.1 m/s
 
-Main-inlet pressure: 12.00-15.84 MPa
+Main-inlet pressure: 14.0-16.0 MPa
 
-Sub-inlet pressure: 1.0-2.6 MPa
+Sub-inlet pressure: 2.3-3.0 MPa
 
 Total 3,125 datasets
 
