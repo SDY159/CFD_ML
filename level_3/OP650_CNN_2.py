@@ -1,16 +1,12 @@
-import sys
 import os
 import pandas as pd
 import numpy as np
-import glob
 import csv
 from sklearn.model_selection import KFold
 from sklearn.metrics import r2_score
-from numpy import array
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Reshape, Conv3D, MaxPooling3D
-from tensorflow.keras.utils import to_categorical
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib
@@ -45,19 +41,19 @@ Number_of_simulations = 3125
 Number_of_particle = 196
 Number_of_timesteps = 50
 Min_particle_size = 0.0000400
-Particle_size_interval = 0.000002
-Min_main_inlet_speed = 8.45
-Main_inlet_speed_interval = 0.8
-Min_sub_inlet_speed = 25
-Sub_inlet_speed_interval = 4
-Min_main_inlet_pressure = 12000000
-Main_inlet_pressure_interval = 960000
-Min_sub_inlet_pressure = 1000000
-Sub_inlet_pressure_interval = 400000
+Particle_size_interval = 0.000005
+Min_main_inlet_speed = 16.75
+Main_inlet_speed_interval = 2.5925
+Min_sub_inlet_speed = 237.03
+Sub_inlet_speed_interval = 48.2575
+Min_main_inlet_pressure = 14000000
+Main_inlet_pressure_interval = 500000
+Min_sub_inlet_pressure = 2300000
+Sub_inlet_pressure_interval = 175000
 Number_of_parameters_for_the_X = 8
 
 Batch_Size = 100
-Epoch = 50
+Epoch = 150
 
 
 # read x
@@ -292,21 +288,27 @@ kfold = KFold(n_splits=5, shuffle=True, random_state=seed)
     #y_train, y_test = y[train_index], y[test_index]
 i=0
 for train, test in kfold.split(X, y):
-    i=i+1
+    
     model = Sequential()
-    model.add(Conv3D(30, kernel_size=(3, 3, 3), activation='tanh', padding='same', data_format='channels_last', input_shape= (Number_of_timesteps, Number_of_particle, Number_of_parameters_for_the_X, 1)))
+    model.add(Conv3D(100, kernel_size=(3, 3, 3), activation='tanh', padding='same', data_format='channels_last', input_shape= (Number_of_timesteps, Number_of_particle , 8, 1)))
     model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
-    model.add(Conv3D(60, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
-    model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
-    model.add(Conv3D(90, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
-    model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
-    model.add(Conv3D(120, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
-    model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
+
     model.add(Conv3D(150, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
     model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
-    model.add(Conv3D(180, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
+
+    model.add(Conv3D(200, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
     model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
-    model.add(Conv3D(210, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
+
+    model.add(Conv3D(250, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
+    model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
+
+    model.add(Conv3D(300, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
+    model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
+
+    model.add(Conv3D(350, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
+    model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
+
+    model.add(Conv3D(400, kernel_size=(2, 2, 2), activation='tanh',padding='same',  data_format='channels_last'))
     model.add(MaxPooling3D(pool_size=(2, 2, 2), padding='same'))
 
 
@@ -341,6 +343,6 @@ for train, test in kfold.split(X, y):
     os.chdir(path + 'level_2/kernel/predicted/')
     for j in range (0, len(predicted_y), 2):
         np.savetxt('predicted_%i_kfold_array_from_RNN%i.csv'%(i, j), predicted_y[j], fmt='%.8e', delimiter=",")
-
+    i=i+1
 print("Average_r2_score: %.5f (+/- %.5f)" % (np.mean(cvscores_ero), np.std(cvscores_ero)))
 
